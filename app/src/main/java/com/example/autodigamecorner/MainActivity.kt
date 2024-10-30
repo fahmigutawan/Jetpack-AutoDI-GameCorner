@@ -11,6 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.autodigamecorner.presentation.devices.DevicesScreen
+import com.example.autodigamecorner.presentation.guide.GuideScreen
+import com.example.autodigamecorner.presentation.mainmenu.MainMenuScreen
 import com.example.autodigamecorner.ui.theme.AutoDIGameCornerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,32 +24,44 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             AutoDIGameCornerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    NavHost(
+                        modifier = Modifier.padding(innerPadding),
+                        navController = navController,
+                        startDestination = "main"
+                    ) {
+                        composable("main") {
+                            MainMenuScreen(
+                                onGuideClick = {
+                                    navController.navigate("guide")
+                                },
+                                onDeviceClick = {
+                                    navController.navigate("device")
+                                }
+                            )
+                        }
+
+                        composable("guide") {
+                            GuideScreen(
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+
+                        composable("device") {
+                            DevicesScreen(
+                                onBackClick = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AutoDIGameCornerTheme {
-        Greeting("Android")
     }
 }

@@ -23,9 +23,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MainMenuScreen(modifier: Modifier = Modifier) {
+fun MainMenuScreen(
+    modifier: Modifier = Modifier,
+    onGuideClick: () -> Unit,
+    onDeviceClick: () -> Unit
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(Color.White),
         contentAlignment = Alignment.Center
@@ -47,7 +51,12 @@ fun MainMenuScreen(modifier: Modifier = Modifier) {
                     .padding(horizontal = 20.dp, vertical = 72.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "Game Corner App", fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Color(0xff1f2937))
+                Text(
+                    text = "Game Corner App",
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xff1f2937)
+                )
 
                 Button(
                     modifier = Modifier.fillMaxWidth(),
@@ -55,7 +64,7 @@ fun MainMenuScreen(modifier: Modifier = Modifier) {
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xff3B82F6)
                     ),
-                    onClick = { /*TODO*/ }
+                    onClick = onGuideClick
                 ) {
                     Text(text = "Petunjuk Peminjaman Game Corner")
                 }
@@ -66,17 +75,11 @@ fun MainMenuScreen(modifier: Modifier = Modifier) {
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xff22c55e)
                     ),
-                    onClick = { /*TODO*/ }
+                    onClick = onDeviceClick
                 ) {
                     Text(text = "Informasi Perangkat Game Corner")
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun PrevMainMenuScreen(modifier: Modifier = Modifier) {
-    MainMenuScreen()
 }
