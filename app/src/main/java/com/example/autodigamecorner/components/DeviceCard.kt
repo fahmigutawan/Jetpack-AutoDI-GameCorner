@@ -1,6 +1,7 @@
 package com.example.autodigamecorner.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -22,16 +23,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeviceCard(
     modifier: Modifier = Modifier,
     show: Boolean,
+    image: String,
+    label: String,
+    description: String,
     onShowChange: (Boolean) -> Unit
 ) {
     ElevatedCard(
@@ -52,11 +59,13 @@ fun DeviceCard(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
+                AsyncImage(
                     modifier = Modifier
                         .size(110.dp)
-                        .clip(RoundedCornerShape(14.dp))
-                        .background(Color.Gray)
+                        .clip(RoundedCornerShape(14.dp)),
+                    model = image,
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop
                 )
 
                 Text(
@@ -64,14 +73,14 @@ fun DeviceCard(
                         .padding(start = 21.dp),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Medium,
-                    text = "Playstation 1"
+                    text = label
                 )
             }
 
             AnimatedVisibility(visible = show) {
                 Text(
                     modifier = Modifier.padding(top = 16.dp),
-                    text = "LOREM IPSUM"
+                    text = description
                 )
             }
 
@@ -87,24 +96,5 @@ fun DeviceCard(
                 color = Color(0xff4248FF)
             )
         }
-    }
-}
-
-@Preview
-@Composable
-fun PrevDeviceCard(modifier: Modifier = Modifier) {
-    Box(
-        modifier = Modifier
-            .background(Color.White)
-    ) {
-        DeviceCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
-            show = false,
-            onShowChange = {
-
-            }
-        )
     }
 }

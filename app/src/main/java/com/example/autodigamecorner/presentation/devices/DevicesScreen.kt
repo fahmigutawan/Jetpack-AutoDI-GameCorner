@@ -77,6 +77,9 @@ fun DevicesScreen(
                 DeviceCard(
                     modifier = Modifier.padding(horizontal = 24.dp),
                     show = viewModel.shownDeviceId.value == item.id,
+                    image = item.image,
+                    label = item.title,
+                    description = item.description,
                     onShowChange = {
                         if (it) {
                             viewModel.shownDeviceId.value = item.id
