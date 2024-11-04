@@ -11,10 +11,8 @@ import io.ktor.serialization.gson.gson
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
 object MainModule {
     @Provides
-    @Singleton
     fun provideHttpClient() = HttpClient(Android){
         install(ContentNegotiation){
             gson()

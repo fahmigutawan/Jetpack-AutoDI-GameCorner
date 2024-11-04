@@ -29,7 +29,7 @@ class ExampleStartupBenchmark {
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun startup() = benchmarkRule.measureRepeated(
+    fun guideStartup() = benchmarkRule.measureRepeated(
         packageName = "com.example.autodigamecorner",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
@@ -39,6 +39,20 @@ class ExampleStartupBenchmark {
         startActivityAndWait()
 
         val button = device.findObject(By.text("Petunjuk Peminjaman Game Corner"))
+        button.click()
+    }
+
+    @Test
+    fun deviceStartup() = benchmarkRule.measureRepeated(
+        packageName = "com.example.autodigamecorner",
+        metrics = listOf(StartupTimingMetric()),
+        iterations = 5,
+        startupMode = StartupMode.COLD
+    ) {
+        pressHome()
+        startActivityAndWait()
+
+        val button = device.findObject(By.text("Informasi Perangkat Game Corner"))
         button.click()
     }
 }
