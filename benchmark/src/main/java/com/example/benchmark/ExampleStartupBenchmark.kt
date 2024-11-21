@@ -32,7 +32,7 @@ class ExampleStartupBenchmark {
     fun guideStartup() = benchmarkRule.measureRepeated(
         packageName = "com.example.autodigamecorner",
         metrics = listOf(StartupTimingMetric()),
-        iterations = 5,
+        iterations = 50,
         startupMode = StartupMode.COLD
     ) {
         pressHome()
@@ -46,7 +46,7 @@ class ExampleStartupBenchmark {
     fun deviceStartup() = benchmarkRule.measureRepeated(
         packageName = "com.example.autodigamecorner",
         metrics = listOf(StartupTimingMetric()),
-        iterations = 5,
+        iterations = 50,
         startupMode = StartupMode.COLD
     ) {
         pressHome()

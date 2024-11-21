@@ -1,5 +1,4 @@
 package com.example.autodigamecorner.presentation.guide
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.autodigamecorner.R
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GuideScreen(
@@ -42,7 +40,6 @@ fun GuideScreen(
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val imgHeight = screenWidth * 256 / 383
     val viewModel = hiltViewModel<GuideViewModel>()
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -80,7 +77,6 @@ fun GuideScreen(
                     contentScale = ContentScale.Crop
                 )
             }
-
             Text(
                 modifier = Modifier
                     .padding(top = 16.dp)
@@ -90,7 +86,6 @@ fun GuideScreen(
                 fontWeight = FontWeight.Bold,
                 color = Color(0xff2563EB)
             )
-
             if (viewModel.guides.isEmpty()) {
                 CircularProgressIndicator(
                     modifier = Modifier
