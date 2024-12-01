@@ -8,9 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class GuideViewModel @Inject constructor(
-    private val repository: Repository
-) : ViewModel(){
+class GuideViewModel @Inject constructor(private val repository: Repository) : ViewModel(){
+    val guideTitle = repository.getGuideTitle()
     val guides = mutableStateListOf<SingleGuideStepResponse>()
     init {
         viewModelScope.launch {

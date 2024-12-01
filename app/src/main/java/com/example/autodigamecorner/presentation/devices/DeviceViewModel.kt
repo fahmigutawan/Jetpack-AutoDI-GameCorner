@@ -9,9 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class DeviceViewModel @Inject constructor(
-    private val repository: Repository
-) : ViewModel() {
+class DeviceViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+    val deviceTitle = repository.getDeviceTitle()
     val devices = mutableStateListOf<SingleDeviceResponse>()
     val shownDeviceId = mutableStateOf("")
     init {

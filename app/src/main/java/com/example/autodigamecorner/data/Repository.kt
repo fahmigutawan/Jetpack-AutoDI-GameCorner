@@ -25,4 +25,6 @@ class Repository @Inject constructor(
             emit(body)
         }
     }
+    fun getGuideTitle() = "Petunjuk Penggunaan"
+    fun getDeviceTitle() = "Perangkat"
 }

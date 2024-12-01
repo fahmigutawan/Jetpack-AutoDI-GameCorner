@@ -1,16 +1,12 @@
 package com.example.benchmark
-
-import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
-import androidx.test.uiautomator.UiDevice
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
 /**
  * This is an example startup benchmark.
  *
@@ -27,32 +23,38 @@ import org.junit.runner.RunWith
 class ExampleStartupBenchmark {
     @get:Rule
     val benchmarkRule = MacrobenchmarkRule()
-
     @Test
     fun guideStartup() = benchmarkRule.measureRepeated(
         packageName = "com.example.autodigamecorner",
         metrics = listOf(StartupTimingMetric()),
-        iterations = 50,
+        iterations = 2,
         startupMode = StartupMode.COLD
     ) {
         pressHome()
         startActivityAndWait()
-
         val button = device.findObject(By.text("Petunjuk Peminjaman Game Corner"))
         button.click()
+        while (true) {
+            if(device.findObject(By.text("Petunjuk Penggunaan")) != null){
+                break
+            }
+        }
     }
-
     @Test
     fun deviceStartup() = benchmarkRule.measureRepeated(
         packageName = "com.example.autodigamecorner",
         metrics = listOf(StartupTimingMetric()),
-        iterations = 50,
+        iterations = 2,
         startupMode = StartupMode.COLD
     ) {
         pressHome()
         startActivityAndWait()
-
         val button = device.findObject(By.text("Informasi Perangkat Game Corner"))
         button.click()
+        while (true) {
+            if(device.findObject(By.text("Perangkat")) != null){
+                break
+            }
+        }
     }
 }
